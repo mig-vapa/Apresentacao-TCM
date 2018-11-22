@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="Offline Frameworks/fontAwesome/all.min.css">
+    <title>Apresentação - Interface</title>
+</head>
+
+<body>
+    <div id="app">
+        <button id="btn-prev" class="btn-slide btn btn-light p-0 text-center" @click="changeSlide(slide - 1)" v-if="this.slide != 0">
+            <!-- <img src="img/arrow-point-to-right.svg" alt="" class="img-fluid"> -->
+            <i class="fas fa-angle-left fa-2x my-auto mx-0 d-block"></i>
+        </button>
+        <button id="btn-next" class="btn-slide btn btn-light p-0 text-center" @click="changeSlide(slide + 1)" v-if="this.slide != this.totalSlides - 1">
+            <!-- <img src="img/arrow-point-to-right.svg" alt="" class="img-fluid"> -->
+            <i class="fas fa-angle-right fa-2x my-auto mx-0 d-block"></i>
+        </button>
+        <button class="btn-slide btn btn-light rounded-circle" id="zoomToggler" data-toggle="zoom">
+            <!-- <img src="img/lupa.png" alt="" class="img-fluid" style="transform:  translateY(-3%)"> -->
+            <i class="fas fa-search fa-2x"></i>
+        </button>
+        <div class="btn-slide rounded" id="zoom-picker">
+            <input class="custom-range d-inline" min="1" max="6" step=".25" value="1" type="range" v-model="zoom">
+            <p class="text-white text-center d-block">
+                {{ zoom }}
+            </p>
+        </div>
+        <button class="btn-slide btn btn-light rounded-circle" data-toggle="modal" data-target="#slidesMenu" id="slidesMenuToggler">
+            <!-- <img src="img/menu-bars.png" alt="" class="img-fluid" style="transform: scale(1.5) translateY(-3%)"> -->
+            <i class="fas fa-bars fa-2x"></i>
+        </button>
+        <div class="progress progress-slide">
+            <div class="progress-bar bg-dark progress-bar-striped progress-bar-animated" :style="{'width': ((slide + 1) * 100 / totalSlides) + '%'}">{{
+                ((slide + 1) * 100 / totalSlides) - ((slide + 1) * 100 / totalSlides) % 1 }}%</div>
+        </div>
+        <div class="slide-presentation text-white" style="background: url('img/vector-hud-interface.jpg')">
+            <div class="dark-overlay">
+                <div class="container">
+                    <h1 class="display-4 text-center my-5 border-bottom pb-3" data-title>
+                        TCM - Grupo D
+                    </h1>
+                    <div class="d-flex flex-row">
+                        <div class="col-6 align-self-center border-right py-4">
+                            <img src="img/Logo.jpg" alt="" class="img-fluid w-75 rounded rounded-circle mx-auto d-block">
+                        </div>
+                        <div class="col-6 align-self-center px-5">
+                            <h1 class="display-4 text-center py-3" style="font-size: 2.5rem">
+                                2º Informática - Grupo D
+                            </h1>
+                            <ul class="list-group text-dark w-100">
+                                <li class="list-group-item" v-for="i in integrantes.sort(function(a,b){return a.n - b.n})">
+                                    {{ i.nome }}, n° {{ i.n }}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide-presentation bg-light" data-initial>
+            <div class="container">
+                <h1 class="display-3 text-center mt-5 border-bottom pb-3" data-title>
+                    Integrantes e Funções
+                </h1>
+
+                <div class="row">
+                    <div class="col-6 align-self-center py-3">
+                        <ul class="list-group text-dark w-100">
+                            <li class="list-group-item" v-for="(i, n) in integrantes.sort(function(a,b){return a.n - b.n})" @mouseover="cubeFace = n">
+                                {{ i.nome }}, n° {{ i.n }}
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-6 align-self-center py-4">
+                        <div class="cube-context">
+                            <div class="cube">
+                                <div class="cube-face cube-face--front">
+                                    <!-- 1 -->
+                                    Chrystian
+                                </div>
+                                <div class="cube-face cube-face--back">
+                                    <!-- ... -->
+                                    Perrella
+                                </div>
+                                <div class="cube-face cube-face--right">
+                                    Pakal
+                                </div>
+                                <div class="cube-face cube-face--left">
+                                    FAvela
+                                </div>
+                                <div class="cube-face cube-face--top">
+                                    Miguel
+                                </div>
+                                <div class="cube-face cube-face--bottom">
+                                    <!-- 6 -->
+                                    Asonso
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- <img src="img/CAnvas.jpg" alt="" class="img-fluid w-75 border border-dark mx-auto d-block rounded"> -->
+            </div>
+        </div>
+
+        <div class="slide-presentation bg-light">
+            <div class="container">
+                <h1 class="display-3 text-center mt-5 border-bottom pb-3" data-title>
+                    Modelo Canvas
+                </h1>
+
+                <img src="img/CAnvas.jpg" alt="" class="img-fluid w-75 border border-dark mx-auto d-block rounded">
+            </div>
+        </div>
+
+        <div class="slide-presentation bg-primary text-white">
+            <div class="container">
+                <h1 class="display-3 text-center mt-5 border-bottom pb-3" data-title>
+                    Gráficos
+                </h1>
+
+                <div id="slider3" class="carousel slide d-block p-i" data-ride="carousel" data-interval="false">
+                    <ol class="carousel-indicators">
+                        <li class="" data-target="#slider3" :class="{'active': i == 0}" v-for="(g, i) in grafs" :data-slide-to="i"></li>
+                    </ol>
+                    <div class="carousel-inner bg-dark">
+                        <div class="carousel-item h-100" v-for="(g, i) in grafs" :class="{'active': i == 0}">
+                            <img class="d-block mx-auto" :src="'img/graficos/' + g" :alt="'Slide ' + i">
+                        </div>
+                    </div>
+
+                    <!-- CONTROLS -->
+                    <a href="#slider3" class="carousel-control-prev" data-slide="prev">
+                        <span class="carousel-control-prev-icon" style="filter: brightness(0)"></span>
+                    </a>
+
+                    <a href="#slider3" class="carousel-control-next" data-slide="next">
+                        <span class="carousel-control-next-icon" style="filter: brightness(0)"></span>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="slide-presentation bg-light">
+            <div class="container">
+                <h1 class="display-3 text-center mt-5 border-bottom pb-3" data-title>
+                    SWOT
+                </h1>
+
+                <img src="img/swot-1.jpg" alt="" class="img-fluid border border-dark mx-auto d-block rounded" style="height: 65vh">
+            </div>
+        </div>
+
+        <div class="slide bg-primary text-white">
+            <div class="container">
+                <h1 class="display-3 text-center mt-5 border-bottom pb-3" data-title>
+                    Pitch
+                </h1>
+
+                <video class=" border border-dark mx-auto d-block rounded" style="height: 65vh" controls>
+                    <source src="videos/Softsong.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+
+
+        <div class="slide-presentation bg-primary text-white">
+            <div class="container">
+                <h1 class="display-3 text-center mt-5 border-bottom pb-3" data-title>
+                    Considerações finais
+                </h1>
+
+                <img src="img/Logo.jpg" alt="Logo" class="img-fluid mx-auto d-block rounded rounded-circle mt-5">
+
+            </div>
+        </div>
+
+        <div class="slide-presentation bg-light">
+            <div class="container py-4">
+                <h1 class="display-4 text-center my-5 border-bottom pb-3" data-title>
+                    Fim - Empreenderismo e Inovação
+                </h1>
+                <ul class="list-group text-dark w-100 border border-primary">
+                    <li class="list-group-item" v-for="i in integrantes.sort(function(a,b){return a.n - b.n})">
+                        {{ i.nome }}, n° {{ i.n }}
+                    </li>
+                </ul>
+                <h1 class="display-4 text-center mt-5">
+                    2º Informática - 2018
+                </h1>
+            </div>
+        </div>
+
+        <div class="modal fade" id="slidesMenu">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Menu</h5>
+                        <button class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body overY-auto">
+                        <div class="d-flex flex-wrap row-hl">
+                            <div class="m-3 px-4 py-3 item-hl menu-item rounded" :class="{'border': !s.Bg.includes('url')}" v-for="s in slidesMenu" :style="{'background': s.Bg, 'color': s.colorTxt, 'border': slide == s.index ? 
+                                          '0.3rem #777 solid !important' : ''}" @click="changeSlide(s.index)">
+                                <p class="lead">
+                                    {{ s.index }}
+                                </p>
+                                {{ s.title }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/vue.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js"></script> -->
+    <script src="js/script.js"></script>
+</body>
+
+</html>

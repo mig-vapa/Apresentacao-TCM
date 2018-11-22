@@ -1,0 +1,104 @@
+#################################################################################################################################################################################
+									Estudando INTERFACE
+
+
+*Conceitos prévios:
+
++classes abstratas:
+São classes com métodos virtuais .Pode-se dizer que as classes abstratas servem como “modelo” para outras classes que dela herdem, não podendo ser instanciada por si só. Para ter um objeto de uma classe abstrata é necessário criar uma classe mais especializada herdando dela e então instanciar essa nova classe. Os métodos da classe abstrata devem então serem sobrescritos nas classes filhas.
+
+
++polimorfismo:
+É a capacidade de assumir diferentes formas, então é o conceito de usar classes abstratas, porque delas iram surgir classes herdadas com os mesmos comportamentos, mas de diferentes formas, usando a sobrescrita de métodos. O uso do polimorfismo tem que obedecer o principio de Liskov que diz "Se você pode invocar um método q() de uma classe T (base), deve poder também invocar o método q() de uma classe T'(derivada) que é derivada com herança de T (base)" e também diz "Uma classe base deve poder ser substituída pela sua classe derivada".
+
+
++sobrescrita de métodos:
+A sobrescrita de métodos é muito utilizada na implementação de polimorfismo para que uma classe filha possa definir seu próprio comportamento, baseada na estrutura da classe mãe.
+
+Ex:
+public class OperacaoMatematica {
+     
+    protected virtual calcular(double x, double y){
+        return 0;
+    }
+}
+
+public class Soma extends OperacaoMatematica {
+ 
+    protected override double calcular(double x, double y){
+        return x + y;
+    }
+}
+
+public class Subtracao extends OperacaoMatematica {
+ 
+    protected override double calcular(double x, double y){
+        return x - y;
+    }
+}
+
+protected = modificador de acesso, só classes filhas terão acesso ao método,classe, etc.
+virtual = mostra que um método é abstrato e pode ser sobrescrito.
+override = mostra que o método em questão está sendo sobrescrito.
+
+INTERFACE:	
+As interfaces são padrões definidos através de contratos. Um contrato define um determinado conjunto de métodos que serão implementados nas classes que assinarem esse contrato. Uma interface é 100% abstrata, ou seja, os seus métodos são definidos como virtual.Uma interface é definida através da palavra reservada “interface”. Para uma classe implementar uma interface é usada a palavra “implements”.As classes que forem implementar uma interface terão de adicionar todos os métodos da interface ou se transformar em uma classe abstrata. O uso de interface facilita o processo, porque voce pode implementar uma interface quantas vezes quiser. A interface promete uma funcionalidade, facilitando pra o programador entender qual o papel da classe que habilitou a interface usada. Muitas linguagens de programação não permitem que uma classe herde mais de uma classe, mas permitem que implemente mais de uma interface, facilitando o compreendimento.
+
+DIFERENÇA ENTRE INTERFACE E CLASSE ABSTRATA:
+Uma classe abstrata pode conter lógica (código), enquanto que uma interface somente pode especificar quais os métodos ou propriedades (no caso de .NET) uma classe que implementa a interface deve definir. Entretanto nenhuma das duas pode ser usada para construir um objeto, para isso é necessário definir uma classe que derive da abstrata (mas que não seja abstrata) ou que implemente a interface.
+
+HERANÇA USANDO CLASSES ABSTRATAS VS IMPLEMENTAÇÃO DE INTERFACES:
+Muitos programadores usam a herança para reutilizar código, o que não é certo, porque fere os principios de Liskov, a herança só pode ser usada no caso de uma classe ser outra, por exemplo uma Pessoa Física ser uma Pessoa. Assim se você tiver uma classe cachorro e uma classe animal, cachorro é um animal, então pode e é recomendado usar a herança entre as classes, mas se você tiver uma classe planta e uma classe animal, e ambos tiverem comportamentos parecidos, como Comer(), é recomendado que o programador use uma interface que tenha o método especifico.
+
+VANTAGENS DO POLIMORFISMO:
+Não podemos instanciar um objeto abstrato, dando mais consistência ao sistema. Já que o método é abstrato, com certeza suas subclasses têm esse método, o que garante que essa invocação de método não vai falhar. Conseguimos dar mais segurança e consistência ao sistema.
+
+EX:
+interface Conta{
+    void depositar(double valor);
+    void sacar(double valor);
+    double getSaldo();
+}
+
+public class ContaCorrente extends JFrame implements Conta {
+    private double saldo;
+    private double taxaOperacao = 0.45;
+     
+    @Override
+    public void deposita(double valor) {
+        this.saldo += valor - taxaOperacao;
+    }
+ 
+    @Override
+    public double getSaldo() {
+        return this.saldo;
+    }
+ 
+    @Override
+    public void sacar(double valor) {
+        this.saldo -= valor + taxaOperacao;
+    }
+ 
+}
+
+public class ContaPoupanca implements Conta {
+    private double saldo;
+     
+    @Override
+    public void deposita(double valor) {
+        this.saldo += valor;        
+    }
+ 
+    @Override
+    public double getSaldo() {
+        return this.saldo;
+    }
+ 
+    @Override
+    public void sacar(double valor) {
+        this.saldo -= valor;
+         
+    }
+ 
+}
+
