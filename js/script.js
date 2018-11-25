@@ -9,32 +9,39 @@ var int;
 var vm1 = new Vue({
     el: '#app',
     data: {
-        integrantes: [{
+        integrantes: [
+            {
                 nome: 'Miguel Velasques',
-                n: 29
+                num: 29,
+                func: 'Gerente e Desenvolvedor ASP.NET'
             },
             {
                 nome: 'Felipe Perrella',
-                n: 8
-            },
-            {
-                nome: 'Lucas Favalli',
-                n: 27
-            },
-            {
-                nome: 'Guilherme Pakalnis',
-                n: 16
+                num: 8,
+                func: 'Desenvolvedor C#'
             },
             {
                 nome: 'Rafael Afonso',
-                n: 31
+                num: 31,
+                func: 'Desenvolvedor SQL e Analista do Sistema'
             },
             {
                 nome: 'Christyan Satoshi',
-                n: 6
-            }
+                num: 6,
+                func: 'Auxiliar de C# e Designer'
+            },
+            {
+                nome: 'Lucas Favalli',
+                num: 27,
+                func: 'Auxiliar de ASP.NET'
+            },
+            {
+                nome: 'Guilherme Pakalnis',
+                num: 16,
+                func: '"Apoio"'
+            },
         ],
-        zoom: 1,
+        zoom: 2,
         grafs: [
             "image.png",
             "image (1).png",
@@ -51,7 +58,7 @@ var vm1 = new Vue({
         ],
         slide: 0,
         runWatch: true,
-        cubeFace: 0
+        // cubeFace: 0
     },
     methods: {
         changeSlide: function(val) {
@@ -95,24 +102,25 @@ var vm1 = new Vue({
         zoom: function(aaa) {
             $('#zoom-box').css('transform', 'scale(' + aaa + '")');
         },
-        cubeFace: function(newVal, oldVal) {
+        // cubeFace: function(newVal, oldVal) {
 
-            if (newVal >= 0 && newVal <= 5) {
-                $('.cube').addClass('cube--change-middle');
-                for (a in ['front', 'back', 'right', 'left', 'top', 'bottom']) {
-                    console.log(['front', 'back', 'right', 'left', 'top', 'bottom'][a]);
-                    $('.cube').removeClass('cube--show-' + ['front', 'back', 'right', 'left', 'top', 'bottom'][a]);
-                }
-                setTimeout(function() {
-                    $('.cube').removeClass('cube--change-middle').addClass('cube--show-' + ['front', 'back', 'right', 'left', 'top', 'bottom'][newVal]);
-                }, 500);
-            }
+        //     if (newVal >= 0 && newVal <= 5) {
+        //         $('.cube').addClass('cube--change-middle');
+        //         for (a in ['front', 'back', 'right', 'left', 'top', 'bottom']) {
+        //             console.log(['front', 'back', 'right', 'left', 'top', 'bottom'][a]);
+        //             $('.cube').removeClass('cube--show-' + ['front', 'back', 'right', 'left', 'top', 'bottom'][a]);
+        //         }
+        //         setTimeout(function() {
+        //             $('.cube').removeClass('cube--change-middle').addClass('cube--show-' + 
+        // ['front', 'back', 'right', 'left', 'top', 'bottom'][newVal]);
+        //         }, 500);
+        //     }
 
-            else {
-                this.cubeFace = oldVal;
-            }
+        //     else {
+        //         this.cubeFace = oldVal;
+        //     }
 
-        }
+        // }
     },
     computed: {
         totalSlides: function() {
@@ -137,6 +145,11 @@ var vm1 = new Vue({
                 });
             });
             return a;
+        },
+        integrantesOrdenados: function() {
+            var a = [];
+            for(i in this.integrantes) a.push(this.integrantes[i]);
+            return a.sort(function(a,b){return a.num - b.num});
         }
     }
 });
@@ -170,7 +183,8 @@ $(document).bind('keyup', function(e) {
 
 
 $('[data-toggle="zoom"]').click(function() {
-    img = $('[data-index="' + vm1.slide + '"] .carousel .carousel-item.active img')[0] != undefined ? $('[data-index="' + vm1.slide + '"] .carousel .carousel-item.active img') : $('[data-index="' + vm1.slide + '"] img');
+    img = $('[data-index="' + vm1.slide + '"] .carousel .carousel-item.active img')[0] != undefined 
+    ? $('[data-index="' + vm1.slide + '"] .carousel .carousel-item.active img') : $('[data-index="' + vm1.slide + '"] img');
 
 
     if (img[0] != undefined) {

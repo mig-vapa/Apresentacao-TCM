@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="Offline Frameworks/fontAwesome/all.min.css">
-    <title>Apresentação - Interface</title>
+    <title>Apresentação - SoftSong</title>
 </head>
 
 <body>
@@ -25,7 +25,7 @@
             <!-- <img src="img/lupa.png" alt="" class="img-fluid" style="transform:  translateY(-3%)"> -->
             <i class="fas fa-search fa-2x"></i>
         </button>
-        <div class="btn-slide rounded" id="zoom-picker">
+        <div class="btn-slide rounded px-1" id="zoom-picker">
             <input class="custom-range d-inline" min="1" max="6" step=".25" value="1" type="range" v-model="zoom">
             <p class="text-white text-center d-block">
                 {{ zoom }}
@@ -39,8 +39,11 @@
             <div class="progress-bar bg-dark progress-bar-striped progress-bar-animated" :style="{'width': ((slide + 1) * 100 / totalSlides) + '%'}">{{
                 ((slide + 1) * 100 / totalSlides) - ((slide + 1) * 100 / totalSlides) % 1 }}%</div>
         </div>
-        <div class="slide-presentation text-white" style="background: url('img/vector-hud-interface.jpg')">
-            <div class="dark-overlay">
+        <!-- style="background: url('img/vector-hud-interface.jpg')" -->
+        <div class="slide-presentation text-white" style="background-color: #333">
+            <!-- <div class="slide-presentation text-white bg-primary" style="background-image: linear-gradient(to right, #0084ff, #4000ff)"> -->
+            <!-- <div class="dark-overlay"> -->
+            <div>
                 <div class="container">
                     <h1 class="display-4 text-center my-5 border-bottom pb-3" data-title>
                         TCM - Grupo D
@@ -54,8 +57,8 @@
                                 2º Informática - Grupo D
                             </h1>
                             <ul class="list-group text-dark w-100">
-                                <li class="list-group-item" v-for="i in integrantes.sort(function(a,b){return a.n - b.n})">
-                                    {{ i.nome }}, n° {{ i.n }}
+                                <li class="list-group-item" v-for="i in integrantesOrdenados">
+                                    {{ i.nome }}, n° {{ i.num }}
                                 </li>
                             </ul>
                         </div>
@@ -64,58 +67,117 @@
             </div>
         </div>
 
-        <div class="slide-presentation bg-light" data-initial>
+        <div class="slide-presentation bg-light">
             <div class="container">
                 <h1 class="display-3 text-center mt-5 border-bottom pb-3" data-title>
                     Integrantes e Funções
                 </h1>
 
                 <div class="row">
-                    <div class="col-6 align-self-center py-3">
-                        <ul class="list-group text-dark w-100">
-                            <li class="list-group-item" v-for="(i, n) in integrantes.sort(function(a,b){return a.n - b.n})" @mouseover="cubeFace = n">
-                                {{ i.nome }}, n° {{ i.n }}
-                            </li>
-                        </ul>
+                    <div class="col-10 align-self-center py-3 offset-1 pt-5">
+                        <p class="h3 border-left border-bottom rounded-bottom-left border-primary mb-3 py-2 text-center" v-for="(i, n) in integrantes">
+                            {{ i.nome }}, {{ i.func }}
+                        </p>
                     </div>
-                    <div class="col-6 align-self-center py-4">
-                        <div class="cube-context">
-                            <div class="cube">
-                                <div class="cube-face cube-face--front">
-                                    <!-- 1 -->
-                                    Chrystian
-                                </div>
-                                <div class="cube-face cube-face--back">
-                                    <!-- ... -->
-                                    Perrella
-                                </div>
-                                <div class="cube-face cube-face--right">
-                                    Pakal
-                                </div>
-                                <div class="cube-face cube-face--left">
-                                    FAvela
-                                </div>
-                                <div class="cube-face cube-face--top">
-                                    Miguel
-                                </div>
-                                <div class="cube-face cube-face--bottom">
-                                    <!-- 6 -->
-                                    Asonso
-                                </div>
-                            </div>
-                        </div>
 
-                    </div>
                 </div>
 
                 <!-- <img src="img/CAnvas.jpg" alt="" class="img-fluid w-75 border border-dark mx-auto d-block rounded"> -->
             </div>
         </div>
 
+        <div class="slide-presentation bg-primary text-white">
+            <div class="container">
+                <h1 class="display-3 text-center mt-5 border-bottom pb-3" data-title>
+                    Situação Problema
+                </h1>
+
+                <p class="display-4 mt-3">
+                    Auxiliar o crescente mercado de música, que demanda tanto de boas plataformas de aprendizado online quanto sistemas informatizados para controle de vendas em lojas físicas e em e-stores.
+                </p>
+            </div>
+        </div>
+
         <div class="slide-presentation bg-light">
             <div class="container">
                 <h1 class="display-3 text-center mt-5 border-bottom pb-3" data-title>
-                    Modelo Canvas
+                    Ferramentas utilizadas
+                </h1>
+
+                <!-- <div id="slider4" class="carousel slide d-block" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li class="active" data-target="#slider4" data-slide-to="0"></li>
+                        <li data-target="#slider4" data-slide-to="1"></li>
+                        <li data-target="#slider4" data-slide-to="2"></li>
+                    </ol>
+                    <div class="carousel-inner bg-dark ">
+                        <div class="carousel-item h-100 active">
+                            <img class="d-block img-fluid mx-auto my-0 img-carousel" src="https://source.unsplash.com/wgq4eit198Q/700x400" alt="First Slide">
+                            
+                        </div>
+                    </div>
+
+                    <a href="#slider4" class="carousel-control-prev" data-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                    </a>
+
+                    <a href="#slider4" class="carousel-control-next" data-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                    </a>
+                </div> -->
+                <div id="slider2" data-ride="carousel" data-interval="false" class="carousel slide d-block">
+                    <ol class="carousel-indicators">
+                        <li data-target="#slider2" :data-slide-to="i - 1" class="active" v-for="i in 7"></li>
+                    </ol>
+                    <div class="carousel-inner bg-dark">
+                        <div class="carousel-item h-100 active">
+                            <img src="img/ferramentas/visualstudio_0.jpg" alt="Visual Studio" class="d-block mx-auto">
+                        </div>
+                        <div class="carousel-item h-100">
+                            <img src="img/ferramentas/sql-server.png" alt="SQL Server" class="d-block mx-auto bg-light">
+                        </div>
+                        <div class="carousel-item h-100">
+                            <img src="img/ferramentas/1200px-Visual_Studio_Code_1.18_icon.svg.png" alt="Visual Studio Code" class="d-block mx-auto bg-light">
+                        </div>
+                        <div class="carousel-item h-100">
+                            <img src="img/ferramentas/visio_gross.jpg" alt="Visio" class="d-block mx-auto bg-light">
+                        </div>
+                        <div class="carousel-item h-100">
+                            <img src="img/ferramentas/dbdesigner.jpg" alt="DBDesigner" class="d-block mx-auto bg-light h-100">
+                        </div>
+                        <div class="carousel-item h-100">
+                            <img src="img/ferramentas/Photoshop.jpg" alt="Photoshop" class="d-block mx-auto bg-light">
+                        </div>
+                        <div class="carousel-item h-100">
+                            <img src="img/ferramentas/programa-sony-vegas-pro-13-software-base-D_NQ_NP_621505-MLB25006942122_082016-F.jpg" alt="Sony Vegas" class="d-block mx-auto bg-light">
+                        </div>
+
+                    </div>
+                    <a href=" #slider2" data-slide="prev" class="carousel-control-prev">
+                        <span class="carousel-control-prev-icon" style="filter: brightness(100);"></span>
+                    </a>
+                    <a href="#slider2" data-slide="next" class="carousel-control-next">
+                        <span class="carousel-control-next-icon" style="filter: brightness(100);"></span>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="slide-presentation bg-primary text-white">
+            <div class="container">
+                <h1 class="display-3 text-center mt-5 border-bottom pb-3" data-title>
+                    Documentação UML - Use case
+                </h1>
+
+                <img src="img/CAnvas.jpg" alt="" class="img-fluid w-75 border border-dark mx-auto d-block rounded">
+            </div>
+        </div>
+
+        <div class="slide-presentation bg-light">
+            <div class="container">
+                <h1 class="display-3 text-center mt-5 border-bottom pb-3" data-title>
+                    Documentação UML - Use case
                 </h1>
 
                 <img src="img/CAnvas.jpg" alt="" class="img-fluid w-75 border border-dark mx-auto d-block rounded">
@@ -125,51 +187,54 @@
         <div class="slide-presentation bg-primary text-white">
             <div class="container">
                 <h1 class="display-3 text-center mt-5 border-bottom pb-3" data-title>
-                    Gráficos
-                </h1>
-
-                <div id="slider3" class="carousel slide d-block p-i" data-ride="carousel" data-interval="false">
-                    <ol class="carousel-indicators">
-                        <li class="" data-target="#slider3" :class="{'active': i == 0}" v-for="(g, i) in grafs" :data-slide-to="i"></li>
-                    </ol>
-                    <div class="carousel-inner bg-dark">
-                        <div class="carousel-item h-100" v-for="(g, i) in grafs" :class="{'active': i == 0}">
-                            <img class="d-block mx-auto" :src="'img/graficos/' + g" :alt="'Slide ' + i">
-                        </div>
-                    </div>
-
-                    <!-- CONTROLS -->
-                    <a href="#slider3" class="carousel-control-prev" data-slide="prev">
-                        <span class="carousel-control-prev-icon" style="filter: brightness(0)"></span>
-                    </a>
-
-                    <a href="#slider3" class="carousel-control-next" data-slide="next">
-                        <span class="carousel-control-next-icon" style="filter: brightness(0)"></span>
-                    </a>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="slide-presentation bg-light">
-            <div class="container">
-                <h1 class="display-3 text-center mt-5 border-bottom pb-3" data-title>
-                    SWOT
-                </h1>
-
-                <img src="img/swot-1.jpg" alt="" class="img-fluid border border-dark mx-auto d-block rounded" style="height: 65vh">
-            </div>
-        </div>
-
-        <div class="slide bg-primary text-white">
-            <div class="container">
-                <h1 class="display-3 text-center mt-5 border-bottom pb-3" data-title>
                     Pitch
                 </h1>
 
                 <video class=" border border-dark mx-auto d-block rounded" style="height: 65vh" controls>
                     <source src="videos/Softsong.mp4" type="video/mp4">
                 </video>
+            </div>
+        </div>
+
+
+        <div class="slide-presentation bg-light">
+            <div class="container">
+                <h1 class="display-3 text-center mt-5 border-bottom pb-3" data-title>
+                    Demosntração dos softwares
+                </h1>
+
+                <img src="img/Logo.jpg" alt="Logo" class="img-fluid mx-auto d-block rounded rounded-circle mt-5">
+
+            </div>
+        </div>
+
+        <div class="slide-presentation bg-primary text-white">
+            <div class="container">
+                <h1 class="display-3 text-center mt-5 border-bottom pb-3" data-title>
+                    Implementações Futuras
+                </h1>
+
+                <ul class="list-group text-dark mt-3 h5">
+                    <li class="list-group-item py-3">
+                        Aplicações Android
+                    </li>
+                    <li class="list-group-item py-3">
+                        Aplicação em Java para controle da Rede Social
+                    </li>
+                    <li class="list-group-item py-3">
+                        Anexagem de arquivos em posts na rede social
+                    </li>
+                    <li class="list-group-item py-3">
+                        Postagem de vídeos na rede social
+                    </li>
+                    <li class="list-group-item py-3">
+                        Chatbot
+                    </li>
+                    <div class="list-group-item py-3">
+                        Controle de aplicação via bluetooth
+                    </div>
+                </ul>
+
             </div>
         </div>
 
@@ -188,11 +253,11 @@
         <div class="slide-presentation bg-light">
             <div class="container py-4">
                 <h1 class="display-4 text-center my-5 border-bottom pb-3" data-title>
-                    Fim - Empreenderismo e Inovação
+                    Fim - SoftSong
                 </h1>
-                <ul class="list-group text-dark w-100 border border-primary">
-                    <li class="list-group-item" v-for="i in integrantes.sort(function(a,b){return a.n - b.n})">
-                        {{ i.nome }}, n° {{ i.n }}
+                <ul class="list-group text-dark w-100">
+                    <li class="list-group-item border-dark" v-for="i in integrantes.sort(function(a,b){return a.n - b.n})">
+                        {{ i.nome }}, n° {{ i.num }}
                     </li>
                 </ul>
                 <h1 class="display-4 text-center mt-5">
@@ -226,6 +291,7 @@
             </div>
         </div>
     </div>
+
 
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>

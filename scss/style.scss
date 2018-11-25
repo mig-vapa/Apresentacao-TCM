@@ -270,7 +270,7 @@ body {
     .cube {
         transform-style: preserve-3d;
         transform-origin: center center;
-        
+
         width: 40vh;
         height: 40vh;
         transition: all .5s cubic-bezier(0.364212423249, 0, 0.635787576751, 1);
@@ -335,4 +335,15 @@ body {
             }
         }
     }
+}
+
+.rounded-bottom-left {
+    border-bottom-left-radius: .75rem !important;
+}
+
+.carousel-img {
+    max-height: 100%;
+    max-width: 100%;
+    height: auto;
+    width: auto;
 }
